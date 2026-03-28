@@ -1,0 +1,34 @@
+# Python
+__pycache__/
+*.py[cod]
+
+# Virtual env
+venv/
+.venv/
+.env/
+
+# Secrets (звичка з самого початку)
+.env
+.env.*
+
+# DB (для навчання можна ігнорити)
+db.sqlite3
+
+# Logs
+*.log
+
+# IDE
+.vscode/
+.idea/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Django
+staticfiles/   # collectstatic результат
+media/         # користувацькі файли
+
+# Testing
+.pytest_cache/
+.coverage
