@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}Home page{% endblock title %}
+{% block contents %}
+{% if patients %}
+<ul>
+    {% for patient in patients %}
+    full name:<b> {{ patient.first_name }} {{ patient.last_name}} </b></br>
+    age:<b> {{patient.age }}</b></br>
+    gender:<b> {{ patient.get_gender_display }}</b></li>
+    {% endfor %}
+</ul>  
+    {% else %}
+    <p>List Empty</p>
+    {% endif %}
+{% endblock contents %}
