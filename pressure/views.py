@@ -11,3 +11,12 @@ def home(request:HttpRequest)->HttpResponse:
         'patients': patients,
     }
     return render(request, 'pressure/home.html', context)
+
+
+
+def result_pressure(request:HttpRequest)-> HttpResponse:
+    objects = BloodPressureRecord.objects.all()
+    context ={
+        'objects': objects
+    }
+    return render(request, 'pressure/result_list.html', context)
