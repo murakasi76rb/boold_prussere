@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}List results{% endblock title %}
+{% block contents %}
+{% if objects %}
+<ul>
+{% for obj in objects %}
+<li>
+{% comment %} SYS/DIA {{ obj.syssystolic }}/{{ obj.diastolic}} HR: {{ obj.pulse }} {% endcomment %}
+{{ obj }}
+</li>
+{% endfor %}
+</ul>
+{% else %}{% endif %}
+{% endblock contents %}
