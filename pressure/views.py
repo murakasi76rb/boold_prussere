@@ -42,9 +42,9 @@ def add_result(request:HttpRequest)->HttpResponse:
 def update_result(request: HttpRequest, pk: int)->HttpResponse:
     obj = get_object_or_404(BloodPressureRecord, pk=pk)
     if request.method == 'POST':
-        value = FormBloodPressureRecord(request.POST, instance=obj)
-        if value.is_valid():
-            result = value.save(commit=False)
+        form = FormBloodPressureRecord(request.POST, instance=obj)
+        if form.is_valid():
+            result = form.save(commit=False)
             result.patient = request.user
             result.save()
             return redirect('pressure:result')
