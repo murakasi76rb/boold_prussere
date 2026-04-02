@@ -1,9 +1,9 @@
 from django.db import models
-from django.utils import timezone
+from django.contrib.auth.models import  AbstractUser
 from django.core.validators import MaxValueValidator, MinValueValidator
+from django.utils import timezone
 
 # Create your models here.
-from django.contrib.auth.models import  AbstractUser
 
 class Gender(models.TextChoices):
     MALE ='m', 'Male'
@@ -36,6 +36,7 @@ class BloodPressureRecord(models.Model):
     patient = models.ForeignKey(User, on_delete=models.CASCADE, related_name='blood_pressure_records')
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
+
     def __str__(self) -> str:
         return f'{self.patient} SYS/DIA: {self.systolic}/{self.diastolic} | HR {self.pulse} time: {self.created_at:%Y-%m-%d %H:%M}'
     

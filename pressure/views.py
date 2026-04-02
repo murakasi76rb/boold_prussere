@@ -1,9 +1,9 @@
 from django.shortcuts import render, redirect, get_object_or_404
-
-# Create your views here.
+from django.contrib.auth.decorators import login_required
 from django.http import HttpRequest, HttpResponse
-from pressure.models import User, BloodPressureRecord
 from pressure.forms import FormBloodPressureRecord
+from pressure.models import User, BloodPressureRecord
+# Create your views here.
 
 def home(request:HttpRequest)->HttpResponse:
     patients = User.objects.all()
@@ -13,14 +13,16 @@ def home(request:HttpRequest)->HttpResponse:
     return render(request, 'pressure/home.html', context)
 
 
-
+@login_required
 def result_pressure(request:HttpRequest)-> HttpResponse:
-    objects = BloodPressureRecord.objects.all()
+    records = BloodPressureRecord.objects.filter(patient=request.user)
     context ={
-        'objects': objects
+        'records': records
     }
     return render(request, 'pressure/result_list.html', context)
 
+
+@login_required
 def add_result(request:HttpRequest)->HttpResponse:
    
     if request.method == 'POST':
@@ -36,9 +38,9 @@ def add_result(request:HttpRequest)->HttpResponse:
     context = {
         'form': form
     }
-    return render(request, 'pressure/add_result.html', context)
+    return render(request, 'pressure/indicators.html', context)
 
-
+@login_required
 def update_result(request: HttpRequest, pk: int)->HttpResponse:
     obj = get_object_or_404(BloodPressureRecord, pk=pk)
     if request.method == 'POST':
